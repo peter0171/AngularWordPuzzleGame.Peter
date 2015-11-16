@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="wordGameDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="wordDetails">
+    <Key>
+      <PropertyRef Name="word_ID" />
+    </Key>
+    <Property Name="word_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="word_Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="image1" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="image2" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="image3" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="image4" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Answer" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="wordGameDBModelStoreContainer">
+    <EntitySet Name="wordDetails" EntityType="Self.wordDetails" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

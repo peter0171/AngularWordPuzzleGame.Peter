@@ -1,0 +1,234 @@
+﻿<html data-ng-app="RESTClientModule">
+@{
+    ViewBag.Title = "Home Page";
+}
+<body data-ng-controller="AngularJs_ImageController">
+
+    <img src="~/Images/blank.gif" alt="" width="1" height="10" />
+    <table width="99%" style=" border-bottom:3px solid #3273d5;">
+        <tr>
+
+            <td width="190">
+                <table width="99%">
+                    <tr>
+                        <td>
+                            Welcome Mr. {{usrName}}
+
+                        </td>
+
+
+                    </tr>
+                </table>
+            </td>
+            <td class="style1" align="center">
+                <h3>{{usrName}}  MVC Web API and Angular JS Word Puzzle Game :)</h3>
+
+
+            </td>
+            <td align="right">
+                <div>
+                    Today Date is :
+                    {{date | date:'yyyy-MM-dd'}}
+                </div>
+
+            </td>
+        </tr>
+    </table>
+    <img src="~/Images/blank.gif" alt="" width="1" height="2" />
+    <table id="tblContainer" style='width: 99%;table-layout:fixed;'>
+        <tr ng-show="showGameStart">
+            <td>
+                <table style=" background-color:#FFFFFF; border: dashed 3px #6D7B8D; padding:10px;width: 99%;table-layout:fixed;" cellpadding="12" cellspacing="12">
+                    <tr style="height: 30px; background-color:#336699 ; color:#FFFFFF ;border: solid 1px #659EC7;">
+                        <td align="center">
+                            <h3> {{usrName}} Word Puzzle Game </h3>
+                        </td>
+
+                    </tr>
+                    <tr style=" background-color:#FFFFFF; border:dotted 3px #6D7B8D; padding: 6px;width: 99%;">
+                        <td>
+                            Enter your Name to start the Game.The Game rule is for each game there will be 5 question will be asked.The question is very simple as each question will be displayed with 4 set of Images ,the user need to find the matching word for the 4 Image combinations and enter the correct answer and click next to display the next question.Each question will have 20 points.If the user answer the puzzle then he will get 20 points for each of his correct answers.If the user enter wrong answer then he will get negative 10 points that is he will get -10 point for each wrong answer.If the user get total 100 Points for all 5 questions then hes the winner.If the user get less than 100 Points then hes looser he can try again.
+                            Note Each time the Questions will be different as i will display the random questions from the database.So kindly check the image well and answer the questions to avoid negative points.Hope you will love this game have fun :)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <table>
+                                <tr>
+
+                                    <td width="20"></td>
+                                    <td valign="top">
+
+                                        <table style="color:#9F000F;font-size:large" cellpadding="4" cellspacing="6">
+
+                                            <tr>
+                                                <td>
+                                                    <b>Enter Your Name</b>
+                                                </td>
+
+                                                <td>
+                                                    : <input type="text" name="txtName" ng-model="usrName" value="" />
+
+                                                </td>
+                                                <td>
+
+                                                    <input type="submit" value="Click to Start Game" style="background-color:#3f9835;color:#FFFFFF;border-color:crimson;border-style:dashed;height:40;width:200;" ng-click="startGame()" />
+
+                                                </td>
+
+
+
+                                        </table>
+
+
+                                    </td>
+
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <img src="~/Images/blank.gif" alt="" width="1" height="4" />
+            </td>
+        </tr>
+        <tr ng-show="showGame">
+            <td align="center">
+
+                <table style=" background-color:#FFFFFF; border: dashed 3px #6D7B8D; padding:10px;width:50%;table-layout:fixed;" cellpadding="12" cellspacing="12">
+
+                    <tr style="height: 20px; background-color:#ccd4dd ; color:#6D7B8D ;border: solid 1px #659EC7;">
+                        <td align="center">
+                            <h3>  Welcome <font color="red"><b> {{ usrName }}</b> </font> to {{usrName}} Word Puzzle Game  </h3>
+                        </td>
+
+                    </tr>
+                    <tr style="height: 20px; background-color:#336699 ; color:#FFFFFF ;border: solid 1px #659EC7;">
+                        <td align="right">
+                            <table cellspacing="12">
+                                <tr>
+
+                                    <td style="padding-left:8;padding-right:8;">
+                                        Question No :
+                                    </td>
+                                    <td style="background-color:#FFFFFF;color:#208e14; border: dashed 2px #e7eef5; width:40px;padding-left:8;padding-right:8;" align="center">
+                                        <b>   {{questionCount}}</b>
+                                    </td>
+                                    <td style="padding-left:8;padding-right:8;">
+                                        Total Wordf Count :
+                                    </td>
+                                    <td style="background-color:#FFFFFF;color:#208e14; border: dashed 2px #e7eef5; width:40px;padding-left:8;padding-right:8;" align="center">
+                                        <b>   {{wordCount}}</b>
+                                    </td>
+                                    <td style="padding-left:8;padding-right:8;">
+                                        Total Points:
+                                    </td>
+                                    <td style="background-color:#FFFFFF;color:#208e14; border: dashed 2px #e7eef5; width:40px;padding-left:8;padding-right:8;" align="center"> <b> {{ totalPoints }}</b></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+
+
+                            <table style=" background-color:#FFFFFF; border: solid 2px #6D7B8D; padding: 5px;width:60%;
+display: inline-block;" cellpadding="2" cellspacing="2">
+
+                                <tr>
+                                    <td align="center">
+
+
+
+                                        <table>
+                                            <tr>
+                                                <td align="center" style=" background-color:#FFFFFF; border: dashed 2px #e44a10; padding:10px;width:50%;">
+                                                    <img src="~/Images/{{ Image1 }}" width="128px" height="128px">
+
+                                                </td>
+                                                <td style=" background-color:#FFFFFF; border: dashed 2px #e44a10; padding:10px;width:50%;">
+                                                    <img src="~/Images/{{ Image2 }}" width="128px" height="128px">
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style=" background-color:#FFFFFF; border: dashed 2px #e44a10; padding:10px;width:50%;">
+                                                    <img src="~/Images/{{ Image3}}" width="128px" height="128px">
+
+                                                </td>
+                                                <td style=" background-color:#FFFFFF; border: dashed 2px #e44a10; padding:10px;width:50%;">
+                                                    <img src="~/Images/{{ Image4 }}" width="128px" height="128px">
+
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr style="height: 20px; background-color:#336699 ; color:#FFFFFF ;border: solid 1px #659EC7;">
+                        <td align="Center">
+                            <table>
+                                <tr>
+                                    <td>Enter Correct Answer and click Next</td>
+
+                                    <td>
+                                        : <input type="text" name="txtAns" ng-model="txtAnswer" value="" />
+
+                                    </td>
+                                    <td>
+
+                                        <input type="submit" value="Next Question" style="background-color:#3f9835;color:#FFFFFF;border-color:#f6f803;border-style:dashed;height:40;width:200;" ng-click="findAnswer()" />
+
+                                    </td>
+
+                                </tr>
+
+
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr ng-show="showresult">
+            <td align="center">
+                <table>
+                    <tr>
+
+                        <td align="center">
+                            <table align="center" style=" background-color:#FFFFFF; border: dashed 3px #6D7B8D; padding:10px;width: 70%;" cellpadding="12" cellspacing="12">
+                                <tr style="height: 30px; background-color:#336699 ; color:#FFFFFF ;border: solid 1px #659EC7;">
+                                    <td>
+
+
+                                        <img src="~/Images/{{ ImageAnswer }}" width="128px" height="128px">
+                                    </td>
+                                    <td>
+                                        {{Resuts}}
+                                        <br />
+                                        <br />
+                                        <input type="submit" value="Click to Start New Game" style="background-color:#3f9835;color:#FFFFFF;border-color:#f6f803;border-style:dashed;height:40;width:200;" ng-click="NewQuestion()" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
+
+
+<script src="~/Scripts/angular.js"></script>
+
+<script src="~/Scripts/angular-animate.js"></script>
+
+<script src="~/Scripts/MYAngular/controller.js"></script>
